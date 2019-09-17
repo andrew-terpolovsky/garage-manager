@@ -1,0 +1,39 @@
+<h1 mat-dialog-title>
+  <span *ngIf="data.car.id">Edit Car</span>
+  <span *ngIf="!data.car.id">Add Car</span>
+</h1>
+<div mat-dialog-content>
+  <div class="form">
+    <div class="form-group">
+      <label class="control-label">Color</label>
+      <input class="form-control" [(ngModel)]="data.car.color">
+      <div class="has-error">{{errors.color}}</div>
+    </div>
+    <div class="form-group">
+      <label class="control-label">Model</label>
+      <input class="form-control" [(ngModel)]="data.car.model">
+      <div class="has-error">{{errors.model}}</div>
+    </div>
+    <div class="form-group">
+      <label class="control-label">Manufacturer</label>
+      <input class="form-control" [(ngModel)]="data.car.manufacturer.name">
+      <div class="has-error" *ngIf="errors.manufacturer">{{errors.manufacturer.name}}</div>
+    </div>
+    <div class="form-group">
+      <label class="control-label">Year</label>
+      <input type="number" class="form-control" [(ngModel)]="data.car.year">
+      <div class="has-error">{{errors.year}}</div>
+    </div>
+    <div class="form-group">
+      <label class="control-label">Garage (optional):</label>
+      <select class="form-control" [(ngModel)]="data.car.garage">
+        <option value="">Please select...</option>
+        <option *ngFor="let g of data.garages" [ngValue]="g.id">{{g.title}}</option>
+      </select>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions class="modal-footer">
+  <button class="btn btn-default" (click)="close()">Close</button>
+  <button class="btn btn-primary" (click)="save()">Save</button>
+</div>
