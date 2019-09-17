@@ -124,6 +124,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
+# Setup login URL
+LOGIN_URL = 'admin:login'
+
 # Rest Framework default permissions
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
