@@ -22,3 +22,6 @@ class GarageAdmin(admin.ModelAdmin):
     list_display = (
         'title', 'cars_amount',
     )
+    filter_horizontal = (
+        'cars',
+    )
