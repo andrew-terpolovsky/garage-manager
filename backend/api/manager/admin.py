@@ -17,11 +17,15 @@ class CarAdmin(admin.ModelAdmin):
     )
 
 
+class CarInline(admin.TabularInline):
+    model = Car
+
+
 @admin.register(Garage)
 class GarageAdmin(admin.ModelAdmin):
     list_display = (
         'title', 'cars_amount',
     )
-    filter_horizontal = (
-        'cars',
+    inlines = (
+        CarInline,
     )
