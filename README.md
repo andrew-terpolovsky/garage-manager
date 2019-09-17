@@ -1,4 +1,4 @@
-#Garage (Garage Manager)
+# Garage (Garage Manager)
 
 **Preamble:**
 A Django rest framework app to manage garages.
@@ -8,7 +8,7 @@ Frontend must be built with angular or reactjs/vuejs. And allow admins/superuser
 
 
 
-#Local backend deployment
+# Local backend deployment
 1. From project root go to backend folder `cd backend`.
 1. Install Python 3.6 (https://www.python.org/).
 2. Install virtualenv
