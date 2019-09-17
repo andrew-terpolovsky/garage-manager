@@ -28,7 +28,7 @@ class Car(models.Model):
     )
     manufacturer = models.ForeignKey(
         verbose_name=_('manufacturer'),
-        to=Manufacturer,
+        to='Manufacturer',
         on_delete=models.CASCADE,
     )
     model = models.CharField(
@@ -37,6 +37,14 @@ class Car(models.Model):
     )
     year = models.PositiveSmallIntegerField(
         verbose_name=_('production year'),
+    )
+    garage = models.ForeignKey(
+        verbose_name=_('add cars'),
+        to='Garage',
+        related_name='cars',
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
     )
 
     def __str__(self):
@@ -50,11 +58,6 @@ class Garage(models.Model):
     title = models.CharField(
         verbose_name=_('title'),
         max_length=24,
-    )
-    cars = models.ManyToManyField(
-        verbose_name=_('add cars'),
-        to=Car,
-        blank=True,
     )
 
     def __str__(self):
