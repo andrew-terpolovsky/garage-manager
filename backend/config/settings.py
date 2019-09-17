@@ -25,7 +25,7 @@ SECRET_KEY = 'r7b_6hzo-p9l==*_dzwcqsmm*sg-j4810fwqr$4n$=gycbc)n2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -125,6 +125,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, os.path.join('website', 'staticfiles'))
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'website', 'static')
+]
 
 # Setup login URL
 LOGIN_URL = 'admin:login'
