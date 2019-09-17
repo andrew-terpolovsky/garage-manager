@@ -11,7 +11,8 @@ export class ManageGarageDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<ManageGarageDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data) {
+    @Inject(MAT_DIALOG_DATA) public data
+  ) {
     this.errors = {};
   }
 
@@ -39,7 +40,8 @@ export class ManageCarDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<ManageCarDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data) {
+    @Inject(MAT_DIALOG_DATA) public data
+  ) {
     this.errors = {};
   }
 
@@ -53,6 +55,28 @@ export class ManageCarDialogComponent {
 
   close() {
     this.dialogRef.close();
+  }
+
+}
+
+@Component({
+  selector: 'app-confirm-deletion-dialog',
+  templateUrl: './confirm-deletion-dialog.html',
+  styleUrls: ['./dialogs.component.scss']
+})
+export class ConfirmDeletionDialogComponent {
+  constructor(
+    public dialogRef: MatDialogRef<ConfirmDeletionDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data
+  ) {
+  }
+
+  save() {
+    this.dialogRef.close(true);
+  }
+
+  close() {
+    this.dialogRef.close(false);
   }
 
 }

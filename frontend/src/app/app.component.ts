@@ -1,6 +1,10 @@
 import {Component} from '@angular/core';
 import {Car, CarResource, Garage, GarageResource, ICar, IGarage} from './app.resource';
-import {ManageCarDialogComponent, ManageGarageDialogComponent} from './dialogs/dialogs.component';
+import {
+  ConfirmDeletionDialogComponent,
+  ManageCarDialogComponent,
+  ManageGarageDialogComponent
+} from './dialogs/dialogs.component';
 import {MatDialog} from '@angular/material/dialog';
 
 @Component({
@@ -109,26 +113,57 @@ export class AppComponent {
   }
 
   deleteCar(car) {
+    if (car.year < new Date().getFullYear() - 35) {
+      const dialogRef = this.dialog.open(ConfirmDeletionDialogComponent, {
+        width: '400px',
+        data: 'Are you sure you want to delete a car older then 35 years?'
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.removeCar(car);
+        }
+      });
+    } else {
+      this.removeCar(car);
+    }
+  }
+
+  removeCar(car) {
     car = new Car(car);
     const id = car.id;
-    console.log(car);
     car.$remove().$promise.then((res) => {
       if (typeof this.garageIndex === 'undefined') {
         const index = this.unassignedCars.map(item => item.id).indexOf(id);
         this.unassignedCars.splice(index, 1);
       } else {
         const index = this.garages[this.garageIndex].cars.map(item => item.id).indexOf(id);
-        this.garages[this.garageIndex].cars.splice(index, 1)
+        this.garages[this.garageIndex].cars.splice(index, 1);
       }
     });
   }
 
-  deleteGarage(car, $event) {
+  deleteGarage(garage, $event) {
     if ($event) {
       $event.stopPropagation();
     }
 
-    car.$delete();
+    const dialogRef = this.dialog.open(ConfirmDeletionDialogComponent, {
+      width: '400px',
+      data: 'Are you sure you want to delete garage?'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        garage = new Garage(garage);
+        const id = garage.id;
+        garage.$remove().$promise.then((res) => {
+          const index = this.garages.map(item => item.id).indexOf(id);
+          this.garages.splice(index, 1);
+          if (index === this.garageIndex && this.garages.length) {
+            this.selectGarage(0);
+          }
+        });
+      }
+    });
   }
 }
 

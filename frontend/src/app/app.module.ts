@@ -8,7 +8,7 @@ import {ResourceModule} from '@ngx-resource/handler-ngx-http';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {ManageCarDialogComponent, ManageGarageDialogComponent} from './dialogs/dialogs.component';
+import {ManageCarDialogComponent, ManageGarageDialogComponent, ConfirmDeletionDialogComponent} from './dialogs/dialogs.component';
 
 
 
@@ -18,7 +18,8 @@ import {CarResource, GarageResource} from './app.resource';
   declarations: [
     AppComponent,
     ManageCarDialogComponent,
-    ManageGarageDialogComponent
+    ManageGarageDialogComponent,
+    ConfirmDeletionDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +36,8 @@ import {CarResource, GarageResource} from './app.resource';
   ],
   entryComponents: [
     ManageCarDialogComponent,
-    ManageGarageDialogComponent
+    ManageGarageDialogComponent,
+    ConfirmDeletionDialogComponent
   ],
   bootstrap: [AppComponent]
 })
