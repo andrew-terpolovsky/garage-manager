@@ -1,3 +1,6 @@
+import re
+
+from django.utils.timezone import now
 from rest_framework import serializers
 
 from .models import Manufacturer, Car, Garage
@@ -11,6 +14,13 @@ class ManufacturerSerializer(serializers.ModelSerializer):
 
 class CarSerializer(serializers.ModelSerializer):
     manufacturer = ManufacturerSerializer()
+
+    def validate_year(self, data):
+        if not re.match(r'^\d{4}$', str(data)):
+            raise serializers.ValidationError('Year should have 4 digits.')
+        elif data > now().year:
+            raise serializers.ValidationError('Year cannot be in future.')
+        return data
 
     def validate_manufacturer(self, data):
         name = data['name']
