@@ -12,6 +12,14 @@ class ManufacturerSerializer(serializers.ModelSerializer):
 class CarSerializer(serializers.ModelSerializer):
     manufacturer = ManufacturerSerializer()
 
+    def validate_manufacturer(self, data):
+        name = data['name']
+        try:
+            instance = Manufacturer.objects.get(name__iexact=name)
+        except Manufacturer.DoesNotExist:
+            instance = Manufacturer.objects.create(name=name)
+        return instance
+
     class Meta:
         model = Car
         fields = '__all__'
