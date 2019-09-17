@@ -29,7 +29,13 @@ class CarsViewSet(viewsets.ModelViewSet):
     serializer_class = CarSerializer
     permission_classes = (CarCreateDeletePermission,)
 
+    def get_queryset(self):
+        if self.request.GET.get('unassigned'):
+            return self.queryset.filter(garage__isnull=True)
+        return self.queryset
+
 
 class GaragesViewSet(viewsets.ModelViewSet):
     queryset = Garage.objects.all()
     serializer_class = GarageSerializer
+    permission_classes = (CarCreateDeletePermission, )
