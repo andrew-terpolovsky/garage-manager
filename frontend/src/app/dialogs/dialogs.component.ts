@@ -21,6 +21,9 @@ export class ManageGarageDialogComponent {
       this.dialogRef.close(this.data.garage);
     }, (err) => {
       this.errors = err.body;
+      if (err.body.detail) {
+        alert(err.body.detail);
+      }
     });
   }
 
@@ -50,6 +53,9 @@ export class ManageCarDialogComponent {
       this.dialogRef.close(this.data.car);
     }, (err) => {
       this.errors = err.body;
+      if (err.body.detail) {
+        alert(err.body.detail);
+      }
     });
   }
 

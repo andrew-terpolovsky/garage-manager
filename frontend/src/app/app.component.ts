@@ -139,6 +139,10 @@ export class AppComponent {
         const index = this.garages[this.garageIndex].cars.map(item => item.id).indexOf(id);
         this.garages[this.garageIndex].cars.splice(index, 1);
       }
+    }, (err) => {
+      if (err.body.detail) {
+        alert(err.body.detail);
+      }
     });
   }
 
@@ -160,6 +164,10 @@ export class AppComponent {
           this.garages.splice(index, 1);
           if (index === this.garageIndex && this.garages.length) {
             this.selectGarage(0);
+          }
+        }, (err) => {
+          if (err.body.detail) {
+            alert(err.body.detail);
           }
         });
       }

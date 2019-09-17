@@ -40,6 +40,28 @@ export class CarResource extends ResourceCRUDPromise<ICarQuery, Car, Car> {
     return new Car(data);
   }
 
+  getCookie(name: string): string {
+    const nameLenPlus = (name.length + 1);
+    return document.cookie
+      .split(';')
+      .map(c => c.trim())
+      .filter(cookie => {
+        return cookie.substring(0, nameLenPlus) === `${name}=`;
+      })
+      .map(cookie => {
+        return decodeURIComponent(cookie.substring(nameLenPlus));
+      })[0] || '';
+  }
+
+  $getHeaders() {
+    const token = this.getCookie('csrftoken');
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'X-CSRFToken': token
+    };
+    return headers;
+  }
 }
 
 export class Car extends ResourceModel implements ICar {
@@ -81,6 +103,29 @@ export class GarageResource extends ResourceCRUDPromise<IGarage[], Garage, Garag
     return new Garage(data);
   }
 
+
+  getCookie(name: string): string {
+    const nameLenPlus = (name.length + 1);
+    return document.cookie
+      .split(';')
+      .map(c => c.trim())
+      .filter(cookie => {
+        return cookie.substring(0, nameLenPlus) === `${name}=`;
+      })
+      .map(cookie => {
+        return decodeURIComponent(cookie.substring(nameLenPlus));
+      })[0] || '';
+  }
+
+  $getHeaders() {
+    const token = this.getCookie('csrftoken');
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'X-CSRFToken': token
+    };
+    return headers;
+  }
 }
 
 export class Garage extends ResourceModel implements IGarage {
