@@ -26,7 +26,7 @@ class CarSerializer(serializers.ModelSerializer):
 
 
 class GarageSerializer(serializers.ModelSerializer):
-    cars = CarSerializer(many=True)
+    cars = CarSerializer(many=True, read_only=True)
 
     class Meta:
         model = Garage
