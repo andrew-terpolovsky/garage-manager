@@ -1,24 +1,43 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import {MatDialogModule} from '@angular/material';
+import {HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ResourceModule} from '@ngx-resource/handler-ngx-http';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {ManageCarDialogComponent, ManageGarageDialogComponent} from './dialogs/dialogs.component';
 
-import { HttpClientModule } from '@angular/common/http';
-import { ResourceModule } from '@ngx-resource/handler-ngx-http';
 
+
+import {CarResource, GarageResource} from './app.resource';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ManageCarDialogComponent,
+    ManageGarageDialogComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
     ResourceModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    CarResource,
+    GarageResource
+  ],
+  entryComponents: [
+    ManageCarDialogComponent,
+    ManageGarageDialogComponent
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
